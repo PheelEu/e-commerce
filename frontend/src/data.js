@@ -1,7 +1,7 @@
 const data = {
     products: [
       {
-        name: 'LG Nanoled TV',
+        name: 'LG Nano Led TV',
         slug: 'nike-slim-shirt',
         category: 'Shirts',
         image: '', // 679px × 829px
