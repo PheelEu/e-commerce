@@ -21,20 +21,20 @@ header a {
 main {
   padding: 1rem;
 }
-.Products {
+.products {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.Product {
+.product {
   border: 1px #404040 solid;
   margin: 1rem;
 }
-.Product img {
+.product img {
   width: 100%;
   max-width: 400px;
 }
-.Product-info {
+.product-info {
   padding: 1rem;
 }
