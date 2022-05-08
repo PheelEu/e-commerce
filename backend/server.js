@@ -10,7 +10,7 @@ const port = process.env.PORT || 4000;
 
 const app = express();
 
-/*
+
 mongoose
   .connect(process.env.DB_URI)
   .then(() => {
@@ -23,7 +23,7 @@ mongoose
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-*/
+
 // test
 app.get('/api/products', (req, res) => {
   res.send(data.products);
