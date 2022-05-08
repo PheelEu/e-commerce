@@ -2,10 +2,10 @@ import { useParams } from 'react-router-dom';
 
 function ProductPage() {
   const params = useParams();
-  const { slug } = params;
+  const { id } = params;
   return (
     <div>
-      <h1>{slug}</h1>
+      <h1>{id}</h1>
     </div>
   );
 }
