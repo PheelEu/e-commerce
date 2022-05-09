@@ -33,6 +33,7 @@ app.get('/api/products', (req, res) => {
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
 });
+
 /*
 import mongoose from "mongoose";
 import dotenv from "dotenv";
