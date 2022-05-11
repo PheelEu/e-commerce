@@ -1,7 +1,23 @@
+import bcrypt from "bcryptjs";
+
 const data = {
+  users: [
+    {
+      name: "Pippo",
+      email: "admin@example.com",
+      password: bcrypt.hashSync("123456"),
+      isAdmin: true,
+    },
+    {
+      name: "Pluto",
+      email: "user@example.com",
+      password: bcrypt.hashSync("123456"),
+      isAdmin: false,
+    },
+  ],
   products: [
     {
-      _id: "6277bd1600ccca89e11e0c78",
+      //_id: "6277bd1600ccca89e11e0c78",
       name: "LG Nano Led TV",
       slug: "lg-slim-tv",
       category: "Shirts",
@@ -14,7 +30,7 @@ const data = {
       description: "high quality TV",
     },
     {
-      _id: "6277bd16d7fd704b4521f198",
+      //_id: "6277bd16d7fd704b4521f198",
       name: "Adidas Fit Shirt",
       slug: "adidas-fit-shirt",
       category: "Shirts",
@@ -27,7 +43,7 @@ const data = {
       description: "high quality product",
     },
     {
-      _id: "6277bd166c429c42f255550f",
+      //_id: "6277bd166c429c42f255550f",
       name: "Nike Slim Pant",
       slug: "nike-slim-pant",
       category: "Pants",
@@ -40,7 +56,7 @@ const data = {
       description: "high quality product",
     },
     {
-      _id: "6277bd168f6475658a374a49",
+      // _id: "6277bd168f6475658a374a49",
       name: "Adidas Fit Pant",
       slug: "adidas-fit-pant",
       category: "Pants",

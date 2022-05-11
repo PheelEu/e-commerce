@@ -1,21 +1,28 @@
-
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
-import CartPage from './pages/CartPage';
-import {Navbar, Container, Badge, Nav}from "react-bootstrap";
-import {LinkContainer} from 'react-router-bootstrap'
-import { useContext } from 'react';
-import { Store } from './Store';
-
+import CartPage from "./pages/CartPage";
+import SigninPage from "./pages/SigninPage";
+import { Navbar, Container, Badge, Nav, NavDropdown } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { useContext } from "react";
+import { Store } from "./Store";
 
 function App() {
-  const { state } = useContext(Store);
-  const { cart } = state;
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
+
+  const signoutHandler = () => {
+    ctxDispatch({ type: "USER_SIGNOUT" });
+    localStorage.removeItem("userInfo");
+  };
 
   return (
     <Router>
       <div className="d-flex flex-column site-container">
+        <ToastContainer position="bottom-center" limit={1} />
         <header>
           <Navbar bg="dark" variant="dark">
             <Container>
@@ -23,15 +30,37 @@ function App() {
                 <Navbar.Brand>E-COMMERCE</Navbar.Brand>
               </LinkContainer>
               <Nav className="me-auto">
-                 <Link to="/cart" className="nav-link">
-                   Cart
-                   {cart.cartItems.length > 0 && (
-                     <Badge pill bg="danger">
-                         {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                     </Badge>
-                   )}
-                 </Link>
-               </Nav>
+                <Link to="/cart" className="nav-link">
+                  Cart
+                  {cart.cartItems.length > 0 && (
+                    <Badge pill bg="danger">
+                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                    </Badge>
+                  )}
+                </Link>
+                {userInfo ? (
+                  <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item>User Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/orderhistory">
+                      <NavDropdown.Item>Order History</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Divider />
+                    <Link
+                      className="dropdown-item"
+                      to="#signout"
+                      onClick={signoutHandler}
+                    >
+                      Sign Out
+                    </Link>
+                  </NavDropdown>
+                ) : (
+                  <Link className="nav-link" to="/signin">
+                    Sign In
+                  </Link>
+                )}
+              </Nav>
             </Container>
           </Navbar>
         </header>
@@ -40,6 +69,7 @@ function App() {
             <Routes>
               <Route path="/product/:slug" element={<ProductPage />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/signin" element={<SigninPage />} />
               <Route path="/" element={<HomePage />} />
             </Routes>
           </Container>
