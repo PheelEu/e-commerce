@@ -17,11 +17,10 @@ const data = {
   ],
   products: [
     {
-      //_id: "6277bd1600ccca89e11e0c78",
       name: "LG Nano Led TV",
       slug: "lg-slim-tv",
       category: "Shirts",
-      image: "", // 679px × 829px
+      image: "/images/lg-tv.jpg",
       price: 1200,
       countInStock: 0,
       brand: "LG",
@@ -30,11 +29,10 @@ const data = {
       description: "high quality TV",
     },
     {
-      //_id: "6277bd16d7fd704b4521f198",
       name: "Adidas Fit Shirt",
       slug: "adidas-fit-shirt",
       category: "Shirts",
-      image: "",
+      image: "/images/lg-tv.jpg",
       price: 250,
       countInStock: 20,
       brand: "Adidas",
@@ -47,7 +45,7 @@ const data = {
       name: "Nike Slim Pant",
       slug: "nike-slim-pant",
       category: "Pants",
-      image: "",
+      image: "/images/lg-tv.jpg",
       price: 25,
       countInStock: 15,
       brand: "Nike",
@@ -60,7 +58,7 @@ const data = {
       name: "Adidas Fit Pant",
       slug: "adidas-fit-pant",
       category: "Pants",
-      image: "",
+      image: "/images/lg-tv.jpg",
       price: 65,
       countInStock: 5,
       brand: "Puma",
