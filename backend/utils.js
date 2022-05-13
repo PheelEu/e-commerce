@@ -10,7 +10,7 @@ import jwt from 'jsonwebtoken';
      },
      process.env.JWT_SECRET,
      {
-       expiresIn: '30d', //TODO #1 : fix
+       expiresIn: '30d',
      }
    );
  };
