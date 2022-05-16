@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {Container,Form,Button} from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { useContext, useEffect, useState } from "react";
 import { Store } from "../Store";
@@ -26,6 +26,7 @@ export default function SignupPage() {
       toast.error("Passwords do not match");
       return;
     }
+    //TODO: 1, create double email error
     try {
       const { data } = await Axios.post("/api/users/signup", {
         name,
@@ -57,7 +58,6 @@ export default function SignupPage() {
           <Form.Label>Name</Form.Label>
           <Form.Control onChange={(e) => setName(e.target.value)} required />
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control

@@ -44,6 +44,7 @@ export default function PaymentMethodPage() {
               value="PayPal"
               checked={paymentMethodName === "PayPal"}
               onChange={(e) => setPaymentMethod(e.target.value)}
+              //TODO : 2 some logos for the api payment
             />
           </div>
           <div className="mb-3">
