@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ShippingAddressPage from './pages/ShippingAddressPage';
+import ShippingAddressPage from "./pages/ShippingAddressPage";
 import { Navbar, Container, Badge, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useContext } from "react";
@@ -10,9 +10,10 @@ import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import SigninPage from "./pages/SigninPage";
-import SignupPage from './pages/SignupPage';
-import PaymentMethodPage from './pages/PaymentMethodPage';
-import PlaceOrderPage from './pages/PlaceOrderPage';
+import SignupPage from "./pages/SignupPage";
+import PaymentMethodPage from "./pages/PaymentMethodPage";
+import PlaceOrderPage from "./pages/PlaceOrderPage";
+import OrderPage from './pages/OrderPage';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -21,8 +22,8 @@ function App() {
   const signoutHandler = () => {
     ctxDispatch({ type: "USER_SIGNOUT" });
     localStorage.removeItem("userInfo");
-    localStorage.removeItem('shippingAddress');
-    localStorage.removeItem('paymentMethod');
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
   };
 
   return (
@@ -80,6 +81,7 @@ function App() {
               <Route path="/shipping" element={<ShippingAddressPage />}></Route>
               <Route path="/payment" element={<PaymentMethodPage />}></Route>
               <Route path="/placeorder" element={<PlaceOrderPage />} />
+              <Route path="/order/:id" element={<OrderPage />}></Route>
               <Route path="/" element={<HomePage />} />
             </Routes>
           </Container>
