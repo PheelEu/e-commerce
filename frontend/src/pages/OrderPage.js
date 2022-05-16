@@ -166,7 +166,7 @@ export default function OrderPage() {
               </Card.Text>
               {order.isPaid ? (
                 <MessageBox variant="success">
-                  Paid at {order.paidAt}
+                  Paid at {order.paidAt.substring(0, 10) + " "+ order.paidAt.substring(11, 16)}
                 </MessageBox>
               ) : (
                 <MessageBox variant="danger">Not Paid</MessageBox>
