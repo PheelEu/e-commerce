@@ -34,18 +34,11 @@ import React, { useContext, useReducer, useState } from 'react';
    });
 
    const submitHandler = async (e) => {
-     e.preventDefault();
+     e.preventDefault(); //to prevent refreshing of the page
      try {
-       const { data } = await axios.put(
-         '/api/users/profile',
-         {
-           name,
-           email,
-           password,
-         },
-         {
-           headers: { Authorization: `Bearer ${userInfo.token}` },
-         }
+       const { data } = await axios.put('/api/users/profile',
+         { name, email, password,},
+         { headers: { Authorization: `Bearer ${userInfo.token}` },}
        );
        dispatch({
          type: 'UPDATE_SUCCESS',

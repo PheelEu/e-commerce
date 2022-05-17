@@ -1,10 +1,20 @@
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShippingAddressPage from "./pages/ShippingAddressPage";
-import { Navbar, Container, Badge, Nav, NavDropdown } from "react-bootstrap";
+import {
+  Navbar,
+  Container,
+  Badge,
+  Nav,
+  NavDropdown,
+  Button,
+} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { getError } from "./utils";
+import axios from "axios";
+import SearchBox from "./components/SearchBox";
 import { Store } from "./Store";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
@@ -26,21 +36,49 @@ function App() {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("shippingAddress");
     localStorage.removeItem("paymentMethod");
-    window.location.href = '/signin';
+    window.location.href = "/signin";
   };
+
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/categories`);
+        setCategories(data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+    fetchCategories();
+  }, []);
 
   return (
     <Router>
-      <div className="d-flex flex-column site-container">
+      <div
+        className={
+          sidebarIsOpen
+            ? "d-flex flex-column site-container active-cont"
+            : "d-flex flex-column site-container"
+        }
+      >
         <ToastContainer position="bottom-center" limit={1} />
         <header>
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
+              <Button
+                variant="dark"
+                onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
+              >
+                <i className="fas fa-bars"></i>
+              </Button>
               <LinkContainer to="/">
-                <Navbar.Brand>E-COMMERCE</Navbar.Brand>
+                <Navbar.Brand>Tech World</Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
+                <SearchBox />
                 <Nav className="me-auto  w-100  justify-content-end">
                   <Link to="/cart" className="nav-link">
                     Cart
@@ -77,6 +115,29 @@ function App() {
             </Container>
           </Navbar>
         </header>
+        <div
+          className={
+            sidebarIsOpen
+              ? "active-nav side-navbar d-flex justify-content-between flex-wrap flex-column"
+              : "side-navbar d-flex justify-content-between flex-wrap flex-column"
+          }
+        >
+          <Nav className="flex-column text-white w-100 p-2">
+            <Nav.Item>
+              <strong>Categories</strong>
+            </Nav.Item>
+            {categories.map((category) => (
+              <Nav.Item key={category}>
+                <LinkContainer
+                  to={`/search?category=${category}`}
+                  onClick={() => setSidebarIsOpen(false)}
+                >
+                  <Nav.Link>{category}</Nav.Link>
+                </LinkContainer>
+              </Nav.Item>
+            ))}
+          </Nav>
+        </div>
         <main>
           <Container className="mt-3">
             <Routes>
@@ -89,7 +150,10 @@ function App() {
               <Route path="/payment" element={<PaymentMethodPage />}></Route>
               <Route path="/placeorder" element={<PlaceOrderPage />} />
               <Route path="/order/:id" element={<OrderPage />}></Route>
-              <Route path="/orderhistory" element={<OrderHistoryPage />}></Route>
+              <Route
+                path="/orderhistory"
+                element={<OrderHistoryPage />}
+              ></Route>
               <Route path="/" element={<HomePage />} />
             </Routes>
           </Container>

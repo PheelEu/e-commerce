@@ -14,6 +14,12 @@ body {
 main {
   flex: 1;
 }
+.btn-primary,
+ .btn-outline-primary { 
+  background-color: #0d6efd;
+  color: #000000;
+}
+
 .products {
   display: flex;
   flex-wrap: wrap;
@@ -53,4 +59,28 @@ main {
 .checkout-steps > div.active {
   border-bottom: 0.2rem solid #0d6efd;
   color: #0d6efd;
+}
+
+/* it's actually the design of the sidebar */
+
+.navbar-brand {
+  font-weight: bold;
+}
+.side-navbar {
+  width: 240px;
+  height: 100%;
+  position: absolute;
+  left: -300px;
+  background-color:  #212529;
+  transition: 0.5s;
+}
+
+.site-container {
+  transition: 0.4s;
+}
+.active-cont {
+  margin-left: 240px;
+}
+.active-nav {
+  left: 0;
 }
