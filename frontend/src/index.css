@@ -15,7 +15,7 @@ main {
   flex: 1;
 }
 .btn-primary,
- .btn-outline-primary { 
+.btn-outline-primary {
   background-color: #0d6efd;
   color: #000000;
 }
@@ -63,6 +63,10 @@ main {
 
 /* it's actually the design of the sidebar */
 
+.nav-link {
+  color: white;
+}
+
 .navbar-brand {
   font-weight: bold;
 }
@@ -71,7 +75,7 @@ main {
   height: 100%;
   position: absolute;
   left: -300px;
-  background-color:  #212529;
+  background-color: #212529;
   transition: 0.5s;
 }
 
