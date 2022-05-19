@@ -131,8 +131,8 @@ export default function SearchPage() {
         <title>Search Products</title>
       </Helmet>
       <Row>
-        <Col md={3}>
-          <h3>Categories</h3>
+        <Col md={2}>
+          <h4>Categories</h4>
           <div>
             <ul>
               <li>
@@ -156,7 +156,7 @@ export default function SearchPage() {
             </ul>
           </div>
           <div>
-            <h3>Price</h3>
+            <h4>Price</h4>
             <ul>
               <li>
                 <Link
@@ -179,7 +179,7 @@ export default function SearchPage() {
             </ul>
           </div>
           <div>
-            <h3>Avg. Customer Review</h3>
+            <h4>Avg. Customer Review</h4>
             <ul>
               {ratings.map((r) => (
                 <li key={r.name}>
@@ -202,7 +202,7 @@ export default function SearchPage() {
             </ul>
           </div>
         </Col>
-        <Col md={9}>
+        <Col md={10}>
           {loading ? (
             <LoadingBox></LoadingBox>
           ) : error ? (
