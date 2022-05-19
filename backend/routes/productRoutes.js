@@ -43,7 +43,7 @@ productRouter.get(
     const priceFilter =
       price && price !== "all"
         ? {
-            // 1-50
+            // takes minimum and maximum price
             price: {
               $gte: Number(price.split("-")[0]),
               $lte: Number(price.split("-")[1]),

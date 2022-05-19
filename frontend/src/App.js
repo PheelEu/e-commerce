@@ -15,6 +15,8 @@ import { useContext, useEffect, useState } from "react";
 import { getError } from "./utils";
 import axios from "axios";
 import SearchBox from "./components/SearchBox";
+import AdminRoute from "./components/AdminRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { Store } from "./Store";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
@@ -27,6 +29,7 @@ import OrderPage from "./pages/OrderPage";
 import OrderHistoryPage from "./pages/OrderHistoryPage";
 import ProfilePage from "./pages/ProfilePage";
 import SearchPage from "./pages/SearchPage";
+import DashboardScreen from "./pages/DashboardPage";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -72,7 +75,7 @@ function App() {
                 variant="dark"
                 onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
               >
-                <i className="fas fa-bars"></i>
+                <i class="fas fa-caret-down"></i>
               </Button>
               <LinkContainer to="/">
                 <Navbar.Brand>Tech World</Navbar.Brand>
@@ -111,8 +114,41 @@ function App() {
                       Sign In
                     </Link>
                   )}
+                  {userInfo && userInfo.isAdmin && (
+                    <NavDropdown title="Admin" id="admin-nav-dropdown">
+                      <LinkContainer to="/admin/dashboard">
+                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/productlist">
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/orderlist">
+                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/userlist">
+                        <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )}
                 </Nav>
               </Navbar.Collapse>
+            </Container>
+          </Navbar>
+          <Navbar bg="dark" variant="dark" expand="lg">
+            <Container>
+              <Nav.Item>
+                <strong>Categories</strong>
+              </Nav.Item>
+              {categories.map((category) => (
+                <Nav.Item key={category}>
+                  <LinkContainer
+                    to={`/search?category=${category}`}
+                    onClick={() => setSidebarIsOpen(false)}
+                  >
+                    <Nav.Link>{category}</Nav.Link>
+                  </LinkContainer>
+                </Nav.Item>
+              ))}
             </Container>
           </Navbar>
         </header>
@@ -147,14 +183,45 @@ function App() {
               <Route path="/search" element={<SearchPage />} />
               <Route path="/signin" element={<SigninPage />} />
               <Route path="/signup" element={<SignupPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    {" "}
+                    <ProfilePage />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/shipping" element={<ShippingAddressPage />}></Route>
               <Route path="/payment" element={<PaymentMethodPage />}></Route>
               <Route path="/placeorder" element={<PlaceOrderPage />} />
-              <Route path="/order/:id" element={<OrderPage />}></Route>
+              <Route
+                path="/order/:id"
+                element={
+                  <ProtectedRoute>
+                    {" "}
+                    <OrderPage />{" "}
+                  </ProtectedRoute>
+                }
+              ></Route>
               <Route
                 path="/orderhistory"
-                element={<OrderHistoryPage />}
+                element={
+                  <ProtectedRoute>
+                    {" "}
+                    <OrderHistoryPage />
+                  </ProtectedRoute>
+                }
+              ></Route>
+              {/* Admin Routes */}
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <AdminRoute>
+                    {" "}
+                    <DashboardScreen />{" "}
+                  </AdminRoute>
+                }
               ></Route>
               <Route path="/" element={<HomePage />} />
             </Routes>
