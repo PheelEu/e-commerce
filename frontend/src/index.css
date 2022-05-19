@@ -64,7 +64,7 @@ main {
 /* it's actually the design of the sidebar */
 
 .nav-link {
-  color: white;
+  color: grey;
 }
 
 .navbar-brand {
@@ -91,4 +91,15 @@ main {
 
 .text-bold {
   font-weight: bold;
+}
+
+a.text-bold {
+  color: black;
+}
+
+strong{
+  color: white;
+}
+.custom-toggler .navbar-toggler-icon {
+  
 }
