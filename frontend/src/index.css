@@ -97,9 +97,10 @@ a.text-bold {
   color: black;
 }
 
-strong{
+strong {
   color: white;
 }
-.custom-toggler .navbar-toggler-icon {
-  
+
+.navbar-light .navbar-toggler-icon {
+  background-image: svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512";
 }
