@@ -32,6 +32,9 @@ import SearchPage from "./pages/SearchPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProductListPage from "./pages/ProductListPage";
 import ProductEditPage from "./pages/ProductEditPage";
+import OrderListPage from "./pages/OrderListPage";
+import UserListPage from "./pages/UserListPage";
+import UserEditPage from "./pages/UserEditPage";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -226,6 +229,14 @@ function App() {
                 }
               ></Route>
               <Route
+                path="/admin/orders"
+                element={
+                  <AdminRoute>
+                    <OrderListPage />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
                 path="/admin/products"
                 element={
                   <AdminRoute>
@@ -234,10 +245,26 @@ function App() {
                 }
               ></Route>
               <Route
-                 path="/admin/product/:id"
+                path="/admin/users"
+                element={
+                  <AdminRoute>
+                    <UserListPage />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path="/admin/product/:id"
+                element={
+                  <AdminRoute>
+                    <ProductEditPage />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                 path="/admin/user/:id"
                  element={
                    <AdminRoute>
-                     <ProductEditPage />
+                     <UserEditPage/>
                    </AdminRoute>
                  }
                ></Route>
