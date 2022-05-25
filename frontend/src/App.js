@@ -139,10 +139,15 @@ function App() {
               </Navbar.Collapse>
             </Container>
           </Navbar>
-          <Navbar bg="dark" variant="dark" expand="lg">
+          <Navbar
+            className="d-none d-sm-block"
+            bg="dark"
+            variant="dark"
+            expand="lg"
+          >
             <Container>
               <Nav.Item>
-                <strong>Categories</strong>
+                <strong>CATEGORIES</strong>
               </Nav.Item>
               {categories.map((category) => (
                 <Nav.Item key={category}>
@@ -166,7 +171,7 @@ function App() {
         >
           <Nav className="flex-column text-white w-100 p-2">
             <Nav.Item>
-              <strong>Categories</strong>
+              <strong>CATEGORIES</strong>
             </Nav.Item>
             {categories.map((category) => (
               <Nav.Item key={category}>
@@ -261,13 +266,13 @@ function App() {
                 }
               ></Route>
               <Route
-                 path="/admin/user/:id"
-                 element={
-                   <AdminRoute>
-                     <UserEditPage/>
-                   </AdminRoute>
-                 }
-               ></Route>
+                path="/admin/user/:id"
+                element={
+                  <AdminRoute>
+                    <UserEditPage />
+                  </AdminRoute>
+                }
+              ></Route>
               <Route path="/" element={<HomePage />} />
             </Routes>
           </Container>
