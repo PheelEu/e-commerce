@@ -120,17 +120,17 @@ export default function UserEditPage() {
               required
             />
           </Form.Group>
-          {!userInfo.isAdmin && !userInfo.email === "admin@example.com" ? (
-            <Form.Check
-              className="mb-3"
-              type="checkbox"
-              id="isAdmin"
-              label="isAdmin"
-              checked={isAdmin}
-              onChange={(e) => setIsAdmin(e.target.checked)}
-            />
+          {(isAdmin && email === "admin@example.com")  ? (
+              <div> </div>
           ) : (
-            <div> </div>
+            <Form.Check
+            className="mb-3"
+            type="checkbox"
+            id="isAdmin"
+            label="isAdmin"
+            checked={isAdmin}
+            onChange={(e) => setIsAdmin(e.target.checked)}
+          />
           )}
           <div className="mb-3">
             <Button disabled={loadingUpdate} type="submit">
