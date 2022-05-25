@@ -110,3 +110,7 @@ strong {
   font-family: "FontAwesome";
   color: white;
 }
+
+button.thumbnail {
+  padding: 0;
+}
