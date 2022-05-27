@@ -77,10 +77,11 @@ function App() {
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
               <Button
+                className="d-block d-sm-none"
                 variant="dark"
                 onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
               >
-                <i class="fas fa-caret-down"></i>
+                <i className="fas fa-bars"></i>
               </Button>
               <LinkContainer to="/">
                 <Navbar.Brand>Tech World</Navbar.Brand>
@@ -162,6 +163,7 @@ function App() {
             </Container>
           </Navbar>
         </header>
+
         <div
           className={
             sidebarIsOpen
@@ -185,6 +187,7 @@ function App() {
             ))}
           </Nav>
         </div>
+
         <main>
           <Container className="mt-3">
             <Routes>
@@ -278,7 +281,9 @@ function App() {
           </Container>
         </main>
         <footer>
-          <div className="text-center">All rights reserved</div>
+          <div className="text-center">
+            By Filippo Euclidi & Matteo Angeloni
+          </div>
         </footer>
       </div>
     </Router>

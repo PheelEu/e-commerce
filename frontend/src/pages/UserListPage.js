@@ -95,7 +95,10 @@ export default function UserListPage() {
       <Helmet>
         <title>Users</title>
       </Helmet>
-      <h1>Users</h1>
+      <h1>
+        Users <i class="fa-solid fa-users"></i>
+      </h1>
+
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
