@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useReducer } from "react";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Table } from "react-bootstrap";
 import { toast } from "react-toastify";
-
 import { Store } from "../Store";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
+import { Helmet } from "react-helmet-async";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -139,10 +139,14 @@ export default function ProductListPage() {
 
   return (
     <div>
-      <h1>Products</h1>
+      <Helmet>
+        <title>Products</title>
+      </Helmet>
       <Row>
         <Col>
-          <h1>Products</h1>
+          <h1>
+            Products <i class="fa-solid fa-boxes-stacked"></i>
+          </h1>
         </Col>
         <Col className="col text-end">
           <div>
@@ -160,7 +164,7 @@ export default function ProductListPage() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <table className="table">
+          <Table responsive="md">
             <thead>
               <tr>
                 <th>ID</th>
@@ -168,7 +172,7 @@ export default function ProductListPage() {
                 <th>PRICE</th>
                 <th>CATEGORY</th>
                 <th>BRAND</th>
-                <th>ACTIONS</th>
+                <th width="150">ACTIONS</th>
               </tr>
             </thead>
             <tbody>
@@ -199,7 +203,7 @@ export default function ProductListPage() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </Table>
           <div>
             {[...Array(pages).keys()].map((x) => (
               <Link
