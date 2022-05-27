@@ -4,7 +4,14 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
 import { Helmet } from "react-helmet-async";
-import { Row, Col, Button } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Button,
+  Collapse,
+  ListGroup,
+  ListGroupItem,
+} from "react-bootstrap";
 import Rating from "../components/Rating";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
@@ -80,6 +87,10 @@ export default function SearchPage() {
   const order = sp.get("order") || "newest";
   const page = sp.get("page") || 1;
 
+  const [openCategories, setOpenCategories] = useState(false);
+  const [openPrices, setOpenPrices] = useState(false);
+  const [openReviews, setOpenReviews] = useState(false);
+
   const [{ loading, error, products, pages, countProducts }, dispatch] =
     useReducer(reducer, {
       loading: true,
@@ -132,75 +143,132 @@ export default function SearchPage() {
       </Helmet>
       <Row>
         <Col md={2}>
-          <h4>Categories</h4>
-          <div>
-            <ul>
-              <li>
-                <Link
-                  className={"all" === category ? "text-bold" : ""}
-                  to={getFilterUrl({ category: "all" })}
-                >
-                  Any
-                </Link>
-              </li>
-              {categories.map((c) => (
-                <li key={c}>
-                  <Link
-                    className={c === category ? "text-bold" : ""}
-                    to={getFilterUrl({ category: c })}
-                  >
-                    {c}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4>Price</h4>
-            <ul>
-              <li>
-                <Link
-                  className={"all" === price ? "text-bold" : ""}
-                  to={getFilterUrl({ price: "all" })}
-                >
-                  Any
-                </Link>
-              </li>
-              {prices.map((p) => (
-                <li key={p.value}>
-                  <Link
-                    to={getFilterUrl({ price: p.value })}
-                    className={p.value === price ? "text-bold" : ""}
-                  >
-                    {p.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4>Avg. Customer Review</h4>
-            <ul>
-              {ratings.map((r) => (
-                <li key={r.name}>
-                  <Link
-                    to={getFilterUrl({ rating: r.rating })}
-                    className={`${r.rating}` === `${rating}` ? "text-bold" : ""}
-                  >
-                    <Rating caption={" "} rating={r.rating}></Rating>
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  to={getFilterUrl({ rating: "all" })}
-                  className={rating === "all" ? "text-bold" : ""}
-                >
-                  <Rating caption={" "} rating={0}></Rating>
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <Row>
+            <Button
+              variant="custom"
+              onClick={() => setOpenCategories(!openCategories)}
+              aria-controls="collapse-categories"
+              aria-expanded={openCategories}
+            >
+              Categories
+            </Button>
+            <Collapse in={openCategories}>
+              <div id="collapse-categories" className="mb-1">
+                <ListGroup>
+                  <ListGroup.Item>
+                    <Link
+                      className={
+                        "all" === category
+                          ? "text-bold Link-custom"
+                          : "Link-custom"
+                      }
+                      to={getFilterUrl({ category: "all" })}
+                    >
+                      ANY
+                    </Link>
+                  </ListGroup.Item>
+                  {categories.map((c) => (
+                    <ListGroup.Item key={c}>
+                      <Link
+                        className={
+                          c === category
+                            ? "text-bold Link-custom"
+                            : "Link-custom"
+                        }
+                        to={getFilterUrl({ category: c })}
+                      >
+                        {c}
+                      </Link>
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </div>
+            </Collapse>
+          </Row>
+          <Row>
+            <Button
+              variant="custom"
+              onClick={() => setOpenPrices(!openPrices)}
+              aria-controls="collapse-prices"
+              aria-expanded={openPrices}
+            >
+              Price
+            </Button>
+            <Collapse in={openPrices}>
+              <div id="collapse-prices" className="mb-1">
+                <ListGroup>
+                  <ListGroup.Item>
+                    <Link
+                      className={
+                        "all" === price
+                          ? "text-bold Link-custom"
+                          : "Link-custom"
+                      }
+                      to={getFilterUrl({ price: "all" })}
+                    >
+                      ANY
+                    </Link>
+                  </ListGroup.Item>
+                  {prices.map((p) => (
+                    <ListGroup.Item key={p.value}>
+                      <Link
+                        to={getFilterUrl({ price: p.value })}
+                        className={
+                          p.value === price
+                            ? "text-bold Link-custom"
+                            : "Link-custom"
+                        }
+                      >
+                        {p.name}
+                      </Link>
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </div>
+            </Collapse>
+          </Row>
+          <Row>
+            <Button
+              variant="custom"
+              onClick={() => setOpenReviews(!openReviews)}
+              aria-controls="collapse-reviews"
+              aria-expanded={openReviews}
+            >
+              Avg. Customer Review
+            </Button>
+            <Collapse in={openReviews}>
+              <div id="collapse-reviews" className="mb-1">
+                <ListGroup>
+                  {ratings.map((r) => (
+                    <ListGroup.Item key={r.name}>
+                      <Link
+                        to={getFilterUrl({ rating: r.rating })}
+                        className={
+                          `${r.rating}` === `${rating}`
+                            ? "text-bold Link-custom"
+                            : "Link-custom"
+                        }
+                      >
+                        <Rating caption={" "} rating={r.rating}></Rating>
+                      </Link>
+                    </ListGroup.Item>
+                  ))}
+                  <ListGroupItem>
+                    <Link
+                      to={getFilterUrl({ rating: "all" })}
+                      className={
+                        rating === "all"
+                          ? "text-bold Link-custom"
+                          : "Link-custom"
+                      }
+                    >
+                      <Rating caption={" "} rating={0}></Rating>
+                    </Link>
+                  </ListGroupItem>
+                </ListGroup>
+              </div>
+            </Collapse>
+          </Row>
         </Col>
         <Col md={10}>
           {loading ? (

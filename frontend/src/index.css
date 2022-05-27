@@ -114,3 +114,17 @@ strong {
 button.thumbnail {
   padding: 0;
 }
+
+.btn-custom {
+  margin-bottom: 3px;
+  background-color: #0d6efd;
+  color: white;
+}
+
+.list-group-item {
+  text-align: center;
+}
+
+.Link-custom {
+  text-decoration: none;
+}

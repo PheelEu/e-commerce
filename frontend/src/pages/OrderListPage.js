@@ -92,7 +92,7 @@ export default function OrderListPage() {
       <Helmet>
         <title>Orders</title>
       </Helmet>
-      <h1>Orders</h1>
+      <h1>Orders <i class="fa-solid fa-truck-fast"></i></h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
