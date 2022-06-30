@@ -54,7 +54,7 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1>Dashboard <i class="fa-solid fa-arrow-trend-up"></i></h1>
       {loading ? (
         <LoadingBox />
       ) : error ? (
@@ -90,7 +90,7 @@ export default function DashboardPage() {
               <Card>
                 <Card.Body>
                   <Card.Title>
-                    $
+                    €
                     {summary.orders && summary.users[0]
                       ? summary.orders[0].totalSales.toFixed(2)
                       : 0}

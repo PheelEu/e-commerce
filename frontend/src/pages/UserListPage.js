@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
+import { Button, Table } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { toast } from "react-toastify";
 import LoadingBox from "../components/LoadingBox";
@@ -98,14 +98,13 @@ export default function UserListPage() {
       <h1>
         Users <i class="fa-solid fa-users"></i>
       </h1>
-
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table">
+        <Table responsive="md">
           <thead>
             <tr>
               <th>ID</th>
@@ -124,6 +123,7 @@ export default function UserListPage() {
                 <td>{user.isAdmin ? "YES" : "NO"}</td>
                 <td>
                   <Button
+                    className="mb-1"
                     type="button"
                     variant="dark"
                     onClick={() => navigate(`/admin/user/${user._id}`)}
@@ -142,7 +142,7 @@ export default function UserListPage() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       )}
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useReducer } from "react";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/esm/Button";
+import { Button, Table } from "react-bootstrap";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { Store } from "../Store";
@@ -48,6 +48,7 @@ export default function OrderHistoryPage() {
     };
     fetchData();
   }, [userInfo]);
+
   return (
     <div>
       <Helmet>
@@ -60,8 +61,7 @@ export default function OrderHistoryPage() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        //TODO : MAKE IT RESPONSIVe FOR SMALL DEVICES
-        <table className="table">
+        <Table responsive="md">
           <thead>
             <tr>
               <th>ID</th>
@@ -69,7 +69,7 @@ export default function OrderHistoryPage() {
               <th>TOTAL</th>
               <th>PAID</th>
               <th>DELIVERED</th>
-              <th>ACTIONS</th>
+              <th width="150">ACTIONS</th>
             </tr>
           </thead>
           <tbody>
@@ -77,7 +77,7 @@ export default function OrderHistoryPage() {
               <tr key={order._id}>
                 <td>{order._id}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{order.totalPrice.toFixed(2)}</td>
+                <td>€{order.totalPrice.toFixed(2)}</td>
                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : "No"}</td>
                 <td>
                   {order.isDelivered
@@ -98,7 +98,7 @@ export default function OrderHistoryPage() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       )}
     </div>
   );

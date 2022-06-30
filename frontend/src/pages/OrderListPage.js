@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useReducer } from "react";
-import Button from "react-bootstrap/Button";
+import { Button, Table } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
@@ -92,14 +92,16 @@ export default function OrderListPage() {
       <Helmet>
         <title>Orders</title>
       </Helmet>
-      <h1>Orders <i class="fa-solid fa-truck-fast"></i></h1>
+      <h1>
+        Orders <i class="fa-solid fa-truck-fast"></i>
+      </h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table">
+        <Table responsive="md">
           <thead>
             <tr>
               <th>ID</th>
@@ -117,7 +119,7 @@ export default function OrderListPage() {
                 <td>{order._id}</td>
                 <td>{order.user ? order.user.name : "DELETED USER"}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{order.totalPrice.toFixed(2)}</td>
+                <td>€{order.totalPrice.toFixed(2)}</td>
                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : "No"}</td>
                 <td>
                   {order.isDelivered
@@ -126,6 +128,7 @@ export default function OrderListPage() {
                 </td>
                 <td>
                   <Button
+                    className="mb-1"
                     type="button"
                     variant="dark"
                     onClick={() => {
@@ -146,7 +149,7 @@ export default function OrderListPage() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       )}
     </div>
   );
