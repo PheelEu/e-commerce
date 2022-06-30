@@ -1,7 +1,7 @@
 {
   "name": "e-commerce",
   "version": "1.0.0",
-  "description": "e-commerce MERN",
+  "description": "e-commerce Tech World App",
   "main": "index.js",
   "scripts": {
     "build": "cd backend && npm install  && cd ../frontend && npm install && npm run build",
